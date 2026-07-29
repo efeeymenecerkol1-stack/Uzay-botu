@@ -3,7 +3,8 @@ import json
 import urllib.request
 
 api_key = os.environ.get("GEMINI_API_KEY")
-url = f"https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key={api_key}"
+# Resmi v1beta Gemini API adresi
+url = f"https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key={api_key}"
 
 prompt_text = (
     "Bugün uzayda yaşanan tarihi bir olayı özetle ve ardından uzayla ilgili aşırı şaşırtıcı 1 ilginç bilgi ver. "
@@ -24,7 +25,6 @@ try:
         result = json.loads(response.read().decode('utf-8'))
         text = result['candidates'][0]['content']['parts'][0]['text']
         
-        # Metni bir txt dosyasına yazdırıyoruz
         with open("gunluk_uzay.txt", "w", encoding="utf-8") as f:
             f.write(text)
             
