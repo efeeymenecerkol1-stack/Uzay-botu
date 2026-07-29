@@ -4,8 +4,8 @@ import urllib.request
 
 api_key = os.environ.get("GEMINI_API_KEY")
 
-# Ücretsiz kotası en geniş ve stabil model
-url = f"https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-latest:generateContent?key={api_key}"
+# Tam ve resmi endpoint adresi
+url = f"https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key={api_key}"
 
 prompt_text = (
     "Bugün uzayda yaşanan tarihi bir olayı özetle ve ardından uzayla ilgili aşırı şaşırtıcı 1 ilginç bilgi ver. "
@@ -32,3 +32,4 @@ try:
         print("Metin başarıyla yazıldı!")
 except Exception as e:
     print(f"Hata oluştu: {e}")
+    
