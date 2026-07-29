@@ -31,4 +31,4 @@ try:
         print("Metin başarıyla yazıldı!")
 except Exception as e:
     print(f"Hata oluştu: {e}")
-                            
+    
