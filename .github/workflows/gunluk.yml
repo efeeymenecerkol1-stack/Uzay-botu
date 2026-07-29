@@ -21,4 +21,12 @@ jobs:
         env:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
         run: python main.py
-        
+
+      - name: Metni Depoya Kaydet
+        run: |
+          git config --global user.name "Uzay Botu"
+          git config --global user.email "bot@github.com"
+          git add gunluk_uzay.txt
+          git commit -m "Günlük uzay bilgisi güncellendi" || exit 0
+          git push
+          
