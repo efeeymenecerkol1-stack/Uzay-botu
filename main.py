@@ -1,21 +1,30 @@
 import os
-from google import genai
+import json
+import urllib.request
 
-# Yeni Google GenAI istemcisini başlat
-client = genai.Client(api_key=os.environ.get("GEMINI_API_KEY"))
+api_key = os.environ.get("GEMINI_API_KEY")
+url = f"https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key={api_key}"
 
-def uzay_bilgisi_uret():
-    prompt = """
-    Bugün uzayda yaşanan tarihi bir olayı özetle ve ardından uzayla ilgili aşırı şaşırtıcı 1 ilginç bilgi ver. 
-    TikTok videosu için uygun, akıcı, dikkat çekici ve en fazla 45 saniyede okunabilecek bir Türkçe metin yaz.
-    """
-    response = client.models.generate_content(
-        model='gemini-2.5-flash',
-        contents=prompt,
-    )
-    print("--- GÜNÜN UZAY ÖZETİ VE BİLGİSİ ---")
-    print(response.text)
+prompt_text = (
+    "Bugün uzayda yaşanan tarihi bir olayı özetle ve ardından uzayla ilgili aşırı şaşırtıcı 1 ilginç bilgi ver. "
+    "TikTok videosu için uygun, akıcı, dikkat çekici ve en fazla 45 saniyede okunabilecek bir Türkçe metin yaz."
+)
 
-if __name__ == "__main__":
-    uzay_bilgisi_uret()
+data = {
+    "contents": [{
+        "parts": [{"text": prompt_text}]
+    }]
+}
+
+headers = {'Content-Type': 'application/json'}
+req = urllib.request.Request(url, data=json.dumps(data).encode('utf-8'), headers=headers)
+
+try:
+    with urllib.request.urlopen(req) as response:
+        result = json.loads(response.read().decode('utf-8'))
+        text = result['candidates'][0]['content']['parts'][0]['text']
+        print("\n=== BAŞARILI! GÜNÜN UZAY BİLGİSİ ===\n")
+        print(text)
+except Exception as e:
+    print(f"Hata oluştu: {e}")
     
