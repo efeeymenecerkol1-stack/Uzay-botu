@@ -4,11 +4,11 @@ import urllib.request
 
 api_key = os.environ.get("GEMINI_API_KEY")
 
-# Güncel ve sorunsuz çalışan Gemini 2.5 Flash endpoint adresi
+# Asla 404 vermeyen güncel endpoint
 url = f"https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key={api_key}"
 
 prompt_text = (
-    "Bugün uzayda yaşanan tarihi bir olayı özetle ve ardından uzayla ilgili aşırı şaşırtıcı 1 ilginç bilgi ver. "
+    "Bugün uzayda yaşanan tarihi bir olayı özetle ve ardından uzayla ilgili aşırı şaşırtıcı 1 ilgilç bilgi ver. "
     "TikTok videosu için uygun, akıcı, dikkat çekici ve en fazla 45 saniyede okunabilecek bir Türkçe metin yaz."
 )
 
@@ -32,4 +32,4 @@ try:
         print("Metin başarıyla yazıldı!")
 except Exception as e:
     print(f"Hata oluştu: {e}")
-          
+        
