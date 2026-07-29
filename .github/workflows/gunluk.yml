@@ -1,0 +1,29 @@
+name: Günlük Uzay Bilgisi Üretici
+
+on:
+  schedule:
+    # Her gün Türkiye saatiyle 18:00'de (UTC 15:00) çalışır
+    - cron: '0 15 * * *'
+  workflow_dispatch: # İstediğin zaman elle çalıştırma butonu ekler
+
+jobs:
+  run-bot:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Kodları Çek
+        uses: actions/checkout@v3
+
+      - name: Python Kur
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+
+      - name: Gerekli Kütüphaneleri Yükle
+        run: |
+          pip install google-generativeai
+
+      - name: Botu Çalıştır
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+        run: python main.py
+        
