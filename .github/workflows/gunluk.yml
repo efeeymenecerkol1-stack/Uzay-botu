@@ -20,6 +20,10 @@ jobs:
         with:
           python-version: '3.10'
 
+      - name: Gerekli Kütüphaneyi Yükle
+        run: |
+          pip install google-genai
+
       - name: Botu Çalıştır
         env:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
@@ -30,6 +34,6 @@ jobs:
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
           git add -A
-          git commit -m "Günlük uzay bilgisi eklendi" || exit 0
+          git commit -m "Günlük uzay bilgisi güncellendi" || exit 0
           git push
           
